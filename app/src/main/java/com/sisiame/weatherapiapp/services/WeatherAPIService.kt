@@ -1,5 +1,7 @@
-package com.sisiame.weatherapiapp.networking.retrofit.services
+package com.sisiame.weatherapiapp.services
 
+import com.sisiame.weatherapiapp.models.WeatherResponse
+import retrofit2.Response
 import retrofit2.http.GET;
 import retrofit2.http.Query
 
@@ -13,8 +15,8 @@ interface WeatherAPIService {
      * @return The response from the weather API.
      */
     @GET("current.json")
-    fun getWeatherDetails(
+    fun getWeatherResponse(
         @Query("key") apiKey: String,
         @Query("q") city: String
-    ) : WeatherResponse
+    ) : Response<WeatherResponse>
 }

@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.sisiame.weatherapiapp.networking.models.Weather
+import com.sisiame.weatherapiapp.models.WeatherResponse
 import kotlinx.coroutines.flow.map
 
 class WeatherDataStore {
@@ -19,7 +19,7 @@ class WeatherDataStore {
     private val WEATHER_CONDITION_KEY = stringPreferencesKey("weather_condition")
     private val WEATHER_CONDITION_ICON_KEY = stringPreferencesKey("weather_condition_icon")
     private val HUMIDITY_KEY = intPreferencesKey("humidity")
-    private val UV_INDEX_KEY = intPreferencesKey("uv_index")
+    private val UV_INDEX_KEY = doublePreferencesKey("uv_index")
     private val FEELS_LIKE_KEY = doublePreferencesKey("feels_like")
 
     /**
@@ -28,15 +28,15 @@ class WeatherDataStore {
      * @param context The context where the dataStore is being edited.
      * 
      */
-    suspend fun saveWeatherDetails(context: Context, weatherDetails : Weather) {
+    suspend fun saveWeatherDetails(context: Context, weatherDetails : WeatherResponse) {
         context.dataStore.edit {  preferences ->
             preferences[CITY_KEY] = weatherDetails.location.name
-            preferences[TEMPERATURE_KEY] = weatherDetails.current.temp_f
+            preferences[TEMPERATURE_KEY] = weatherDetails.current.temperature
             preferences[WEATHER_CONDITION_KEY] = weatherDetails.current.condition.text
-            preferences[WEATHER_CONDITION_ICON_KEY] = weatherDetails.current.condition.icon
+            preferences[WEATHER_CONDITION_ICON_KEY] = weatherDetails.current.condition.iconUrl
             preferences[HUMIDITY_KEY] = weatherDetails.current.humidity
-            preferences[UV_INDEX_KEY] = weatherDetails.current.uv
-            preferences[FEELS_LIKE_KEY] = weatherDetails.current.feelslike_f
+            preferences[UV_INDEX_KEY] = weatherDetails.current.uvIndex
+            preferences[FEELS_LIKE_KEY] = weatherDetails.current.feelsLike
         }
     }
 

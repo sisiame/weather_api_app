@@ -56,6 +56,7 @@ import com.sisiame.weatherapiapp.presentation.ui.theme.gray
 import com.sisiame.weatherapiapp.presentation.ui.theme.ink
 import com.sisiame.weatherapiapp.presentation.ui.theme.lightGray
 import com.sisiame.weatherapiapp.presentation.viewmodels.HomeViewModel
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 @Composable
@@ -80,7 +81,6 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
             searchQuery = searchQuery,
             onSearchQueryChanged = {
                 searchQuery = it
-                viewModel.searchCity(searchQuery.trim(), apiKey)
             },
             focusRequester = focusRequester
         )
@@ -195,7 +195,7 @@ fun SearchResultCard(
         ) {
             Column(
                 modifier = Modifier
-                    .size(85.dp)
+                    .height(85.dp)
                     .wrapContentWidth(Alignment.Start),
             ) {
                 Box(
@@ -206,7 +206,8 @@ fun SearchResultCard(
                     Text(
                         text = cityName,
                         style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.align(Alignment.Center)
+                        modifier = Modifier.align(Alignment.Center),
+                        maxLines = 1
                     )
                 }
                 Box(
@@ -270,7 +271,8 @@ fun WeatherInfo(
         ) {
             Text(
                 text = cityName,
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineMedium,
+                maxLines = 1
             )
             Spacer(modifier = Modifier.width(11.dp))
             Image(
@@ -417,7 +419,7 @@ fun SearchBar(
         singleLine = true,
         modifier = Modifier
             .fillMaxWidth()
-            .height(46.dp)
+            .height(50.dp)
             .focusRequester(focusRequester),
         shape = RoundedCornerShape(16.dp),
         keyboardActions = KeyboardActions(

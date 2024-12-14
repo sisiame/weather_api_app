@@ -4,6 +4,7 @@ import com.sisiame.weatherapiapp.domain.models.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface WeatherAPIService {
     /**
@@ -18,5 +19,10 @@ interface WeatherAPIService {
     suspend fun getWeatherResponse(
         @Query("key") apiKey: String,
         @Query("q") city: String,
+    ) : Response<WeatherResponse>
+
+    @GET
+    suspend fun getWeather(
+        @Url url: String
     ) : Response<WeatherResponse>
 }

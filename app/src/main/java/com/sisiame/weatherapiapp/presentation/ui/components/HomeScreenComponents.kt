@@ -221,11 +221,11 @@ fun SearchResultCard(
                     )
                     Text(
                         text = "°",
-                        fontSize = 16.sp,
+                        fontSize = 32.sp,
                         modifier = Modifier
                             .align(Alignment.TopEnd)
                             .offset(
-                                x = 4.dp,
+                                x = 8.dp,
                                 y = -MaterialTheme.typography.bodyLarge.fontSize.value.dp / 2
                             ) // Position the degree symbol
                     )
@@ -294,10 +294,10 @@ fun WeatherInfo(
             )
             Text(
                 text = "°",
-                fontSize = 16.sp,
+                fontSize = 32.sp,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .offset(x = 4.dp, y = -MaterialTheme.typography.bodyLarge.fontSize.value.dp / 2)
+                    .offset(x = 8.dp, y = -MaterialTheme.typography.bodyLarge.fontSize.value.dp / 2)
             )
         }
     }

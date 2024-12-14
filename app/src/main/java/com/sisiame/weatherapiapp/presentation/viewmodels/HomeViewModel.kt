@@ -17,8 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val mockWeatherRepository: MockWeatherRepository,
-    private val weatherRepository: WeatherRepository,
+    private val weatherRepository: MockWeatherRepository,
     private val weatherDataStore: WeatherDataStore
 ) : ViewModel() {
     private val _weatherState = MutableLiveData<HomeScreenState>(HomeScreenState.NoCitySelected)
@@ -40,7 +39,7 @@ class HomeViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val response = if(BuildConfig.DEBUG) mockWeatherRepository.fetchWeather(city, apiKey) else weatherRepository.fetchWeather(city, apiKey)
+            val response = weatherRepository.fetchWeather(city, apiKey)
             // in the future, we can update this to handle more states
             // with different screens (http error, etc.), but we will
             // keep it simple for the sake of this assignment

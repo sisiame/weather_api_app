@@ -41,7 +41,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.sisiame.weatherapiapp.BuildConfig
 import com.sisiame.weatherapiapp.R
 import com.sisiame.weatherapiapp.domain.models.WeatherResponse
 import com.sisiame.weatherapiapp.presentation.ui.theme.WeatherAPIAppTheme
@@ -61,7 +61,7 @@ import kotlin.math.roundToInt
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
     val weatherState by viewModel.weatherState.observeAsState()
-    val apiKey = stringResource(R.string.api_key)
+    val apiKey = BuildConfig.WEATHER_API_KEY
     val focusRequester = remember { FocusRequester() }
     var searchQuery by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current

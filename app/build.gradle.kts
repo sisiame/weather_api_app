@@ -1,3 +1,8 @@
+val weatherApiKey: String? by project
+if (weatherApiKey.isNullOrEmpty()) {
+    throw GradleException("API key is missing in local.properties")
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +23,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "WEATHER_API_KEY", "\"${weatherApiKey}\"")
     }
 
     buildTypes {
@@ -37,6 +43,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }

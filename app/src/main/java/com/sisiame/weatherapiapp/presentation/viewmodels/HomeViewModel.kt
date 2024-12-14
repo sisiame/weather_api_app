@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sisiame.weatherapiapp.BuildConfig
 import com.sisiame.weatherapiapp.data.local.WeatherDataStore
 import com.sisiame.weatherapiapp.data.repositories.MockWeatherRepository
 import com.sisiame.weatherapiapp.data.repositories.WeatherRepository
@@ -39,11 +40,11 @@ class HomeViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val response = mockWeatherRepository.fetchWeather(city, apiKey)
+            val response = if(BuildConfig.DEBUG) mockWeatherRepository.fetchWeather(city, apiKey) else weatherRepository.fetchWeather(city, apiKey)
             // in the future, we can update this to handle more states
             // with different screens (http error, etc.), but we will
             // keep it simple for the sake of this assignment
-            if (response.isSuccess) {
+            if (response.isSuccess && response.getOrNull()!!.location.name.equals(city, ignoreCase = true)) {
                 _weatherState.value = HomeScreenState.CityFound(response.getOrNull()!!)
             } else {
                 _weatherState.value = HomeScreenState.CityNotFound

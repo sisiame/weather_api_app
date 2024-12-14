@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val weatherRepository: WeatherRepository,
+    private val weatherRepository: MockWeatherRepository,
     private val weatherDataStore: WeatherDataStore
 ) : ViewModel() {
     private val _weatherState = MutableLiveData<HomeScreenState>(HomeScreenState.NoCitySelected)

@@ -13,9 +13,11 @@ val Poppins = FontFamily(
     Font(R.font.poppins)
 )
 
+// Ideally we would use Poppins, but the font would not work
+// and we are looking to complete the project within the time
+// parameter provided, so we instead use FontFamily.Default.
 val fontFamily = FontFamily.Default
 
-// Set of Material typography styles to start with
 val Typography = Typography(
     headlineLarge = TextStyle(
         fontFamily = fontFamily,
